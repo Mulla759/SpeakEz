@@ -1,0 +1,69 @@
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<meta name="theme-color" content="#F4F2EE" />
+<meta name="color-scheme" content="light" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="speakEz" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="description" content="Anonymous voice notes, tied to the places they were left." />
+<meta property="og:title" content="speakEz" />
+<meta property="og:description" content="Anonymous voice notes, tied to the places they were left." />
+<meta property="og:image" content="/icon-512.png" />
+<link rel="manifest" href="/manifest.webmanifest" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="icon" href="/icon-192.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;700&family=Lexend:wght@600;700;800&family=Newsreader:ital,wght@1,500&display=swap" rel="stylesheet">
+<style id="speakez-shell">
+:root{--purple:#5B3E96;--purple-2:#6B4FA0;--lav:#ECE6F5;--ink:#14121A;--muted:#5F5A6B;--line:#E4DFEE}
+html,body{height:100%;margin:0;background:#F4F2EE;color-scheme:light;}
+body{overflow:hidden;overscroll-behavior:none;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-text-size-adjust:100%;font-family:"Karla",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;}
+#root{display:flex;height:100vh;height:100dvh;width:100%;max-width:100%;margin:0 auto;position:relative;overflow:hidden;background:#F4F2EE;}
+*{-webkit-user-select:none;user-select:none;touch-action:manipulation;}
+input,textarea{-webkit-user-select:text;user-select:text;}
+#splash{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#F4F2EE;z-index:9999;transition:opacity .35s ease;}
+#splash b{font-family:"Newsreader",Georgia,serif;font-style:italic;font-weight:500;font-size:44px;letter-spacing:-.01em;color:#231F2B;animation:sp 1.6s ease-in-out infinite;}
+#splash i{margin-top:14px;width:44px;height:3px;border-radius:2px;background:#6B4FA0;opacity:.35;animation:sp 1.6s ease-in-out infinite;}
+@keyframes sp{0%,100%{opacity:.55}50%{opacity:1}}
+.maplibregl-ctrl-attrib{font-size:10px!important;background:rgba(255,255,255,.7)!important;border-radius:8px!important;margin:0 8px 118px 0!important;}
+.maplibregl-canvas{outline:none;}
+.maplibregl-map{font-family:inherit;}
+#info,#band{display:none}
+@media (min-width:640px){
+  html.desk,html.desk body{background:#fff}
+  html.desk #root{display:none}
+  #splash{display:none}
+  .phoneframe{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);height:min(1100px,calc(100vh - 36px));aspect-ratio:9/18.5;width:auto;max-width:90vw;border:0;border-radius:52px;box-shadow:0 0 0 9px #14121A,0 40px 90px rgba(58,40,105,.30);background:#F4F2EE;z-index:5}
+}
+@media (min-width:1080px){
+  .phoneframe{left:auto;right:5.5vw;transform:translateY(-50%)}
+  html.desk #band{display:flex;position:fixed;left:0;right:0;bottom:0;height:clamp(96px,15vh,150px);background:var(--lav);align-items:center;gap:clamp(20px,3.4vw,56px);padding:0 calc(5.5vw + min(44vw,calc((100vh - 36px)*.4865)) + 4vw) 0 4.5vw;z-index:1}
+  #band .thanks{font:700 clamp(10px,.8vw,12px)/1.6 "Lexend",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--purple);flex:none;width:8.2em}
+  #band .logos{display:flex;align-items:center;flex:1;min-width:0;gap:clamp(14px,2.2vw,36px)}
+  #band img{flex:1 1 0;min-width:0;width:0;height:clamp(40px,7.4vh,68px);object-fit:contain}
+  #band img[alt^="Lovable"]{flex-grow:2.1}#band img[alt^="Holmes"]{flex-grow:1.5}#band img[alt^="Red"]{flex-grow:1}#band img[alt^="0-1"]{flex-grow:1}
+  html.desk #info{display:flex;flex-direction:column;position:fixed;left:4.5vw;top:0;bottom:clamp(96px,15vh,150px);right:calc(5.5vw + min(44vw,calc((100vh - 36px)*.4865)) + 4vw);justify-content:center;gap:clamp(12px,2.2vh,26px);color:var(--ink);overflow:hidden}
+  #info .brand{display:flex;flex-direction:column;gap:5px}
+  #info .word{font-family:"Newsreader",Georgia,serif;font-style:italic;font-weight:500;font-size:clamp(30px,4.2vh,46px);color:var(--purple);letter-spacing:-.01em;line-height:1}
+  #info .by{font:700 clamp(10px,.8vw,12px)/1 "Lexend",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+  #info h1{margin:0;font:800 clamp(34px,min(4.7vw,8vh),84px)/1.02 "Lexend",sans-serif;letter-spacing:-.035em;color:var(--ink)}
+  #info .duo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.2vw,18px)}
+  #info .tile{border-radius:20px;padding:clamp(14px,2.4vh,26px) clamp(16px,1.6vw,26px);display:flex;flex-direction:column;gap:clamp(6px,1.1vh,12px)}
+  #info .tile.map{background:var(--lav);color:var(--ink)}
+  #info .tile.jr{background:var(--ink);color:#fff}
+  #info .pill{align-self:flex-start;font:700 clamp(9.5px,.75vw,11.5px)/1 "Lexend",sans-serif;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px;border-radius:99px;display:inline-flex;align-items:center;gap:8px}
+  #info .map .pill{background:var(--purple);color:#fff}
+  #info .jr .pill{background:#fff;color:var(--ink)}
+  #info .pill svg{width:12px;height:12px}
+  #info .tile h2{margin:0;font:700 clamp(18px,min(1.9vw,3.2vh),30px)/1.08 "Lexend",sans-serif;letter-spacing:-.02em}
+  #info .tile p{margin:0;font:400 clamp(12.5px,min(1.02vw,1.9vh),16px)/1.45 "Karla",sans-serif}
+  #info .map p{color:#3E3950}#info .jr p{color:#CFCADB}
+  #info .team{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1vw,14px)}
+  #info .team>*{border:1.5px solid var(--line);border-radius:14px;padding:clamp(9px,1.6vh,16px) clamp(12px,1.1vw,18px);text-decoration:none;color:var(--ink);display:flex;flex-direction:column;justify-content:center;gap:3px;min-width:0;background:#fff;transition:border-color .15s,transform .15s}
+  #info .team a:hover{border-color:var(--purple-2);transform:translateY(-1px)}
+  #info .team .lead{background:linear-gradient(135deg,#5B3E96,#6F52AE);border-color:transparent;color:#fff}
+  #info .team small{font:700 clamp(8.5px,.65vw,10px)/1 "Lexend",sans-serif;letter-spacing:.16em;text-transform:uppercase;opacity:.75}
+  #info .team b{font:700 clamp(14px,min(1.25vw,2.2vh),19px)/1.15 "Karla",sans-serif}
+  #info .team span{font:400 clamp(11px,.88vw,13px)/1.2 "Karla",sans-serif;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+}
+</style>
+<script>(function(){try{if(window.top!==window.self)return;if(window.innerWidth<640||window.innerHeight<520)return;document.documentElement.className+=" desk";document.addEventListener("DOMContentLoaded",function(){var f=document.createElement("iframe");f.className="phoneframe";f.src=location.href;f.setAttribute("allow","geolocation; microphone; autoplay; clipboard-write");f.title="speakEz";document.body.appendChild(f);});}catch(e){}})();</script>

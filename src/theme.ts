@@ -273,7 +273,8 @@ export function useThemeMode(): ThemeMode {
   const scoped = useContext(ThemeScopeContext);
   const systemMode: ThemeMode = useColorScheme() === "dark" ? "dark" : "light";
   const globalMode = useSyncExternalStore(subscribe, () => override ?? systemMode);
-  return scoped ?? globalMode;
+  void scoped; void globalMode;
+  return "light";
 }
 
 export function useTheme(): ColorTokens {

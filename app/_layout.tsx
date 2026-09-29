@@ -31,6 +31,13 @@ export default function RootLayout() {
   });
   const theme = useTheme();
   const mode = useThemeMode();
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    if (loaded && (session.ready || session.error)) {
+      const el = document.getElementById("splash");
+      if (el) { el.style.opacity = "0"; setTimeout(() => el.remove(), 400); }
+    }
+  }, [loaded, session.ready, session.error]);
 
   if (!loaded) return null;
   if (!session.ready) return (
