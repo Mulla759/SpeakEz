@@ -109,8 +109,12 @@ def _transcribe_sync(note_id: str, data: bytes, suffix: str) -> asr.Transcript:
         return asr.transcribe(wav_path)
 
 
-async def process_note(note_id: str) -> None:
-    """Turn one submitted note into a reviewed draft. Safe to retry; only moves "processing"."""
+async def process_note(ctx, note_id: str) -> None:
+    """Turn one submitted note into a reviewed draft. Safe to retry; only moves "processing".
+
+    arq always calls a job as `fn(ctx, *args)`, so `ctx` must stay the first parameter;
+    without it every job fails with a TypeError and notes sit at "processing" forever.
+    """
     try:
         note_uuid = uuid.UUID(note_id)
     except ValueError:
