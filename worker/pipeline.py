@@ -104,7 +104,9 @@ def _transcribe_sync(note_id: str, data: bytes, suffix: str) -> asr.Transcript:
     with tempfile.TemporaryDirectory(prefix="speakez-") as work:
         source = os.path.join(work, f"{note_id}.{suffix}")
         Path(source).write_bytes(data)
-        wav_path = os.path.join(work, f"{note_id}.wav")
+        # Never the same path as `source`: WAV uploads arrive as .wav, and ffmpeg refuses to
+        # overwrite its own input (exit 234), which left every WAV note stuck at "processing".
+        wav_path = os.path.join(work, f"{note_id}.16k.wav")
         asr.to_wav_16k_mono(source, wav_path)
         return asr.transcribe(wav_path)
 
